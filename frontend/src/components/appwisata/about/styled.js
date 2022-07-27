@@ -69,6 +69,27 @@ export default makeStyles((theme) => ({
             width: '71.5%',
         }
     },
+    cardProtocol: {
+        backgroundColor: '#F2F2F2',
+        display: 'flex',
+        // justifyContent: 'center',
+        padding: '30px',
+        width: '100%',
+        flexDirection: 'column',
+        [theme.breakpoints.up('md')]:{
+            padding: '30px',
+            width: '71.5%',
+            flexDirection: 'row',
+        }
+    },
+    imgProtocol:{
+        height: '280px', 
+        marginRight: '0px',
+        [theme.breakpoints.up('md')]:{
+            marginRight: '40px',
+            height: '140px',
+        }
+    },
     join: {
         flexGrow: 1, 
         fontWeight: 'bold', 

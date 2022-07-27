@@ -40,4 +40,10 @@ export default makeStyles((theme) => ({
           width: '120ch',
         },
       },
+      ul: {
+        "& .MuiPaginationItem-root": {
+          color: "black"
+        }
+      }
+    
 }))

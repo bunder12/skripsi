@@ -3,11 +3,12 @@ import { Typography } from '@material-ui/core'
 import LogoFooter from '../../../assset/logoFooter.svg'
 import useStyles from './styled'
 
-const Footer = () => {
+const Footer = ({refContact}) => {
 
     const classes = useStyles()
 
   return (
+    <main ref={refContact}>
     <div className={classes.container}>
         <div className={classes.areaFooter}>
         <div className={classes.img}>
@@ -42,6 +43,7 @@ const Footer = () => {
             </Typography>
         </div>
     </div>
+    </main>
   )
 }
 

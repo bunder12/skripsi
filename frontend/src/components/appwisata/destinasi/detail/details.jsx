@@ -67,6 +67,7 @@ const Details = ({idWisata, dataUser}) => {
     }).catch(e => {
         console.log(e)
     })
+    axios.put(`http://localhost:5000/totalRating/${wisata._id}`)
     }
 
     const handleCloses = (event, reason) => {
@@ -85,13 +86,13 @@ const Details = ({idWisata, dataUser}) => {
             <ArrowBack style={{fontSize: '40px', color: 'black'}}/>
         </Button>
         </Link>
-            <div className='flex pb-12'>
-            <div className='basis-8/12'>
+            <div className='block md:flex pb-12'>
+            <div className='basis-full md:basis-8/12'>
                 <div>
                     <Typography variant='h4'>{wisata.wisata}</Typography>
 
                     <img className='w-full' src={`http://localhost:5000/admin/getSingleImage/${wisata.gambar}`}/>
-                    <Typography variant='h6'>Kategori</Typography>
+                    <Typography variant='h6'>Deskripsi</Typography>
                     <Typography variant='subtitle1'>{wisata.deskripsi}</Typography>
                 </div>
                 <Divider style={{margin: '20px 0'}}/>
@@ -141,7 +142,7 @@ const Details = ({idWisata, dataUser}) => {
                         value={wisata.totalRating}
                         precision={0.5}
                       />
-                    <Typography style={{marginLeft: '10px'}}>{wisata.totalRating} ({ratingKomentar.length} ulasan)</Typography>
+                    <Typography style={{marginLeft: '10px'}}>{Math.round(wisata.totalRating)}.0 ({ratingKomentar.length} ulasan)</Typography>
                     </div>
                     {
                         ratingKomentar.length && (
@@ -163,7 +164,7 @@ const Details = ({idWisata, dataUser}) => {
                     }
                 </div>
             </div>
-            <div className='basis-4/12 sticky px-8 h-screen top-0'>
+            <div className='basis-full md:basis-4/12 sticky px-0 md:px-8 h-screen top-0'>
                 <Card>
                     <CardContent>
                         <Typography>Alamat</Typography>

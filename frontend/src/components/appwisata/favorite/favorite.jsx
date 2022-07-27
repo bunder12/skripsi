@@ -19,16 +19,12 @@ const Favorite = ({favorite}) => {
                 <img src={`http://localhost:5000/admin/getSingleImage/${item.gambar}`} alt='wisata' className=' w-full h-[80%] rounded-md scale-100 hover:scale-[1.05] hover:ease-in-out hover:duration-700 duration-700'/>
                 <div className='bg-white absolute bottom-0 left-[18px] rounded-xl w-[88%] p-4 shadow-2xl flex flex-col items-center'>
                     <h2 className='text-2xl'>{item.wisata}</h2>
-                    {/* <p className='text-sm text-gray-500'>Anim veniam sit nulla reprehenderit veniam officia dolore ut velit occaecat velit voluptate ad est.</p> */}
                     <span className='flex items-center'>
                       <Rating
                         readOnly
                         name="Rating Label"
                         value={item.totalRating}
                         precision={0.5}
-                        // onChange={(event, newValue) => {
-                        //   setRatingValue(newValue);
-                        // }}
                       />
                       <p className='ml-2 text-xl font-semibold'>{item.totalRating}</p>
                     </span>

@@ -2,12 +2,49 @@ import React, { useState } from 'react'
 import { AppBar, Button, Grid, IconButton, InputBase, MenuItem, Toolbar, Typography, Menu, Divider, Avatar, ListItemIcon, Container, Box } from '@material-ui/core'
 import { Search, AccountCircle, Bookmark, Close, ChevronRight, KeyboardArrowDown } from '@material-ui/icons'
 import MenuIcon from '@material-ui/icons/Menu'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
+// import Links from '@material-ui/core/Link'
 import AnimateButton from '../../ui-component/extended/AnimateButton'
 import LogoNav from '../../../assset/logoNav.svg'
 import useStyles from './styled'
 
-const Navbar = ({dataUser}) => {
+const Navbar = ({dataUser, refAbout, refHome, refContact, refKategori, refRekomendasi}) => {
+
+    function showAbout() {
+        window.scrollTo({
+          top: refAbout.current.offsetTop - 30,
+          behavior: "smooth"
+        })
+      }
+
+      function showHome() {
+        window.scrollTo({
+          top: refHome.current.offsetTop - 30,
+          behavior: "smooth"
+        })
+      }
+
+      function showContact() {
+        window.scrollTo({
+          top: refContact.current.offsetTop - 30,
+          behavior: "smooth"
+        })
+      }
+
+      function showKategori() {
+        window.scrollTo({
+          top: refKategori.current.offsetTop - 30,
+          behavior: "smooth"
+        })
+        setSubMenuDesktop(!subMenuDesktop)
+      }
+
+      function showRekomendasi() {
+        window.scrollTo({
+          top: refRekomendasi.current.offsetTop - 30,
+          behavior: "smooth"
+        })
+      }
 
     const [profil, setProfil] = useState(null)
     const [open, setOpen] = useState(false)
@@ -35,7 +72,9 @@ const Navbar = ({dataUser}) => {
 
     const handleLogout = () => {
         localStorage.clear("token")
+        window.location.href = '/';
     }
+
 
     const isMenuOpen = Boolean(profil);
     const menuId = 'account-menu';
@@ -157,8 +196,8 @@ const Navbar = ({dataUser}) => {
                     )
                 }
                 <div className={classes.menuDesktop}>
-                <Typography style={{marginRight: '16px'}}>Home</Typography>
-                <Typography style={{marginRight: '16px'}}>About</Typography>
+                <Typography onClick={showHome} style={{marginRight: '16px'}}>Home</Typography>
+                <Typography onClick={showAbout} style={{marginRight: '16px'}}>About</Typography>
                 <Typography onClick={()=> setSubMenuDesktop(!subMenuDesktop)} style={{marginRight: '16px'}}>
                     Explore
                     {
@@ -170,13 +209,13 @@ const Navbar = ({dataUser}) => {
                     <div style={{ position: 'absolute', top: '44px', left: '100px'}}>
                         <Box style={{backgroundColor: '#1E293B'}}>
                         <MenuItem component={Link} to="/all-destinasi">All Destinasi</MenuItem>
-                        <MenuItem>Kategori</MenuItem>
-                        <MenuItem>Rekomendasi</MenuItem>
+                        <MenuItem onClick={showKategori}>Kategori</MenuItem>
+                        <MenuItem onClick={showRekomendasi}>Rekomendasi</MenuItem>
                         </Box>
                     </div>
                     )
                 }
-                <Typography style={{marginRight: '16px'}}>Contact</Typography>
+                <Typography onClick={showContact} style={{marginRight: '16px'}}>Contact</Typography>
                 </div>
                 {
                     !login && (

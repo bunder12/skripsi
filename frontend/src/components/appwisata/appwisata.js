@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Banner from './banner/banner'
 import Navbar from './navbar/navbar'
 import About from './about/about'
@@ -9,6 +9,12 @@ import Rekomendasi from './rekomendasi/rekomendasi'
 import axios from 'axios'
 
 const Appwisata = ({onAddFavorite, onDetail}) => {
+
+  const refAbout = useRef(null)
+  const refHome = useRef(null)
+  const refContact = useRef(null)
+  const refKategori = useRef(null)
+  const refRekomendasi = useRef(null)
 
   const [dataUser, setDataUser] = useState([])
   const [profile, setProfile] = useState(
@@ -41,11 +47,11 @@ const Appwisata = ({onAddFavorite, onDetail}) => {
 
   return (
     <div>
-      <Navbar dataUser={dataUser}/>
-      <Banner/>
+      <Navbar refAbout={refAbout} refHome={refHome} refKategori={refKategori} refRekomendasi={refRekomendasi} refContact={refContact} dataUser={dataUser}/>
+      <Banner refHome={refHome}/>
       {
         login && (
-          <Kategori/>
+          <Kategori refKategori={refKategori}/>
           )
         }
         {
@@ -55,11 +61,11 @@ const Appwisata = ({onAddFavorite, onDetail}) => {
         }
         {
           login && (
-            <Rekomendasi/>
+            <Rekomendasi refRekomendasi={refRekomendasi}/>
           )
         }
-      <About/>
-      <Footer/>
+      <About refAbout={refAbout}/>
+      <Footer refContact={refContact}/>
     </div>
   )
 }

@@ -4,7 +4,8 @@ const Wisata = require('../modelwisata/model');
 const Rating = require('../../user/modelrating/rating')
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken')
-const { kirimEmail } = require('../email/email')
+const { kirimEmail } = require('../email/email');
+const { index } = require('mathjs');
 
 exports.daftarUser = async (req, res) => {
     const { username, email, password, konfirPass} = req.body
@@ -195,11 +196,14 @@ exports.getRating = async (req, res) => {
 
 exports.totalRating = async(req, res) => {
     const {id} = req.params
-    const { totalRating } = req.body
 
-    // const rating = await Rating.find().select('aid rating')
+    const rating = await Rating.find({aid: id}).select('rating')
+    const ratingPertama = rating[0].rating
+    var jum = 0
+    rating.map(rat => {jum += rat.rating})
+    const total = jum / rating.length
     const post = await Wisata.findOne({_id: id}).select('-__v')
-    post.totalRating= totalRating
+    post.totalRating= rating.length != 0? total : ratingPertama
     await post.save()
 
     // return res.status(201).json({

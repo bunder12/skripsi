@@ -7,11 +7,12 @@ import Fade from 'react-reveal/Fade'
 import useStyles from './styled'
 import { Link } from 'react-router-dom';
 
-const Banner = () => {
+const Banner = ({refHome}) => {
 
   const classes = useStyles();
 
   return (
+    <main ref={refHome}>
     <div className={classes.container} >
       <Container className={classes.container}>
       <div className={classes.areaText}>
@@ -35,6 +36,7 @@ const Banner = () => {
       </div>
       </Container>
     </div>
+    </main>
   )
 }
 

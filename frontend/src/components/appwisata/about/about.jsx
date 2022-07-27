@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Card, CardContent, Grid, Typography, ListItemIcon } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 import Like from '../../../assset/like.svg';
@@ -15,14 +15,19 @@ import Destinasi from '../../../assset/destination.svg';
 import useStyles from './styled'
 import { Link } from 'react-router-dom';
 import click from '../../../assset/like.json'
+import protocol from '../../../assset/kategori/safety.png'
 import Lottie from 'lottie-web';
 import Gabung from '../../../assset/animate/handshake.json'
 import Cari from '../../../assset/animate/radar.json'
 import Telusuri from '../../../assset/animate/navigation.json'
 
-const About = () => {
+const About = ({refAbout}) => {
 
     const classes = useStyles();
+
+    const [login, setLogin] = useState(
+        localStorage.getItem("token")? true : false
+      )
 
     const rekBB = [
         {
@@ -125,6 +130,7 @@ useEffect(() => {
 }, [Gabung])
 
   return (
+    <main ref={refAbout}>
     <div className={classes.container}>
         <div className={classes.areaTitle}>
             <img className={classes.kotak1} src={Kotak1}/>
@@ -156,11 +162,22 @@ useEffect(() => {
             }
         </Grid>
         <div className={classes.areaJoin}>
+            {
+                login?
+                <div className={classes.cardProtocol}>
+                <img className={classes.imgProtocol} src={protocol}/>
+                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                <Typography style={{fontWeight: 'bold'}} variant='h4'>Jaga Kesehatan Saat Berwisata</Typography>
+                <Typography variant='subtitle1'>Selalu patuhi protocol kesehatan dalam berwisata, untuk mencegah penyebaran virus, dan jangan lupa<br/> Menggunakan Masker, Menjaga Jarak dan Mencuci Tangan </Typography>
+                </div>
+            </div>
+            :
             <div className={classes.cardJoin}>
                 <div className={classes.joinImg} id='Gabung'/>
             <Typography className={classes.join} variant='h5'>Join bersama <span>RekBB</span></Typography>
             <Button style={{backgroundColor: '#09DE1F', color: '#1E293B', fontWeight: '600'}} component={Link} to="/register" variant='contained' color='primary'>Registrasi</Button>
             </div>
+            }
         </div>
         <div className={classes.areaTitle}>
             <div className={classes.title}>
@@ -188,6 +205,7 @@ useEffect(() => {
             }
         </Grid>
     </div>
+    </main>
   )
 }
 

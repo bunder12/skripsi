@@ -12,6 +12,4 @@ router.put('/updateWisata/:id', updateWisata);
 router.delete('/deleteWisata/:id', deleteWisata);
 router.get('/getMember', getMember);
 
-
-
 module.exports = router

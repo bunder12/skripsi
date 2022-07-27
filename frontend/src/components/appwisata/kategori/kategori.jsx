@@ -7,7 +7,7 @@ import Sejarah from '../../../assset/kategori/sejarah.png'
 import Airterjun from '../../../assset/kategori/airterjun.png'
 import useStyles from './styled'
 
-const Kategori = () => {
+const Kategori = ({refKategori}) => {
 
     const classes = useStyles();
 
@@ -35,7 +35,7 @@ const Kategori = () => {
     ];
 
   return (
-      <main className={classes.content}>
+      <main className={classes.content} ref={refKategori}>
         <Container>
       <div className={classes.toolbar}/>
       <div className={classes.titleContent}>

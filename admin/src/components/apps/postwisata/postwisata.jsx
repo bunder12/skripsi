@@ -8,13 +8,13 @@ import axios from 'axios'
 
 const Postwisata = () => {
 
-const [images, setImages] = useState([]);
+const [images, setImages] = useState('');
 const [imageList, setImageList] = useState([]);
   const maxNumber = 69;
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    setImageList(imageList);
     setImages(imageList[0].file);
+    setImageList(imageList);
   };
 
     const [kategori, setKategori] = useState([]);
@@ -61,7 +61,6 @@ const [imageList, setImageList] = useState([]);
             }
         })
         .then(res => {
-            console.log(res)
             document.querySelector("#wisata").value = "";
             document.querySelector("#deskripsi").value = "";
             document.querySelector("#lat").value = "";

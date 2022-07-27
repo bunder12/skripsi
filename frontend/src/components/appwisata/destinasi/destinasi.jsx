@@ -46,7 +46,7 @@ const Destinasi = ({onAddFavorite, onDetail, dataUser}) => {
                         //   setRatingValue(newValue);
                         // }}
                       />
-                      <p className='ml-2 text-xl font-semibold'>{datas.totalRating}</p>
+                      <p className='ml-2 text-xl font-semibold'>{Math.round(datas.totalRating)}.0</p>
                     </span>
                     <p className='text-gray-500 mb-3'>(42 Review)</p>
                     <Button fullWidth onClick={() => onDetail(datas._id, dataUser)} component={Link} to="/detail" variant='contained'>Detail</Button>
