@@ -75,6 +75,10 @@ const Navbar = ({dataUser, refAbout, refHome, refContact, refKategori, refRekome
         window.location.href = '/';
     }
 
+    const handleLogin = () => {
+        window.location.href = '/login';
+    }
+
 
     const isMenuOpen = Boolean(profil);
     const menuId = 'account-menu';
@@ -209,8 +213,8 @@ const Navbar = ({dataUser, refAbout, refHome, refContact, refKategori, refRekome
                     <div style={{ position: 'absolute', top: '44px', left: '100px'}}>
                         <Box style={{backgroundColor: '#1E293B'}}>
                         <MenuItem component={Link} to="/all-destinasi">All Destinasi</MenuItem>
-                        <MenuItem onClick={showKategori}>Kategori</MenuItem>
-                        <MenuItem onClick={showRekomendasi}>Rekomendasi</MenuItem>
+                        <MenuItem onClick={login? showKategori:handleLogin}>Kategori</MenuItem>
+                        <MenuItem onClick={login? showRekomendasi:handleLogin}>Rekomendasi</MenuItem>
                         </Box>
                     </div>
                     )

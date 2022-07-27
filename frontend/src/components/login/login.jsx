@@ -49,10 +49,22 @@ const Login = () => {
             const email = result.user.email;
             const profilePic = result.user.photoURL;
 
+            // const data = {
+            //     username: "google",
+            //     password: 123
+            // }
+
+            // axios.post('http://localhost:5000/login', data)
+            // .then(result => {
+            //     if(result) {
+            //         localStorage.setItem('token', result.data.token)
+            //     }
+            // })
+
             localStorage.setItem("name", name);
             localStorage.setItem("email", email);
             localStorage.setItem("profilePic", profilePic);
-            localStorage.setItem("token", "profilePic");
+            localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZTE1MDIyZmRlMmM1MGM5MjgwOWNjMiIsImlhdCI6MTY1ODkzMzI5OX0.3uz1ozxm7l7A297gWMaS7unlGQ-moqrXQrWc8yBdOBA");
             setRedirect(true)
             })
             .catch((error) => {
