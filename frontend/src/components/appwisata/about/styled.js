@@ -57,7 +57,7 @@ export default makeStyles((theme) => ({
         padding: '40px 0px',
         display: 'flex',
         justifyContent: 'center',
-        marginBottom: '80px'
+        marginBottom: '40px'
     },
     cardJoin: {
         backgroundColor: '#F2F2F2',

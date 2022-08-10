@@ -25,7 +25,7 @@ const Resetpassword = () => {
             token: token
         }
 
-        axios.put('http://localhost:5000/resetpassword', data)
+        axios.put('https://rekomend.herokuapp.com/resetpassword', data)
         .then(result => {
            console.log(result)
         }).catch(e => {

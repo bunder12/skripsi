@@ -42,7 +42,10 @@ export default makeStyles((theme) => ({
         flexDirection: 'column',
         color: '#000A44',
         [theme.breakpoints.up('md')]: {
-            fontSize: '54px',
+            fontSize: '40px',
+        },
+        [theme.breakpoints.up('lg')]: {
+            fontSize: '52px',
         }
     },
     subtitle: {

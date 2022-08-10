@@ -137,14 +137,14 @@ useEffect(() => {
             <img className={classes.kotak2} src={Kotak2}/>
             <div className={classes.title}>
             <Typography className={classes.typogTitle} variant='h3'>Apa itu RekBB?</Typography>
-            <Typography variant='subtitle'>
-                RekBB merupakan kepanjangan dari <sapn style={{fontWeight: 'bold'}}>Rekreasi Bangka Belitung</sapn> yaitu Website yang dapat mempermudah anda dalam mencari destinasi wisata yang ada di bangka belitung
+            <Typography variant='subtitle1'>
+                RekBB merupakan kepanjangan dari <span style={{fontWeight: 'bold'}}>Rekreasi Bangka Belitung</span> yaitu Website yang dapat mempermudah anda dalam mencari destinasi wisata yang ada di bangka belitung
             </Typography>
             </div>
         </div>
         <Grid className={classes.areaCard} container justify="center" spacing={8}>
             {
-                rekBB.map((rekBBs) => (
+                rekBB.map(rekBBs => (
                 <Grid item xs={12} sm={6} md={4} lg={3}>
                     <Card className={classes.card}>
                         <CardContent className={classes.cardContent}>
@@ -152,7 +152,7 @@ useEffect(() => {
                             {rekBBs.img}
                         </ListItemIcon>
                         <Typography style={{fontWeight: '600', marginBottom: 10}} variant='h5'>{rekBBs.title}</Typography>
-                        <Typography>
+                        <Typography variant='subtitle1'>
                             {rekBBs.subtitle}
                         </Typography>
                         </CardContent>
@@ -182,7 +182,7 @@ useEffect(() => {
         <div className={classes.areaTitle}>
             <div className={classes.title}>
             <Typography className={classes.typogTitle} variant='h3'>Cari Wisata?</Typography>
-            <Typography variant='subtitle'><span style={{fontWeight: 'bold'}}>Pakai RekBB!!!</span> Beberapa alasan wisatawan menggunakan RekBB</Typography>
+            <Typography variant='subtitle1'><span style={{fontWeight: 'bold'}}>Pakai RekBB!!!</span> Beberapa alasan wisatawan menggunakan RekBB</Typography>
             </div>
         </div>
         <Grid className={classes.areaCard} container justify="center" spacing={8}>
@@ -195,7 +195,7 @@ useEffect(() => {
                         {dataReks.img}
                     </ListItemIcon>
                     <Typography style={{fontWeight: '600', marginBottom: 10}} variant='h5'>{dataReks.title}</Typography>
-                    <Typography>
+                    <Typography variant='subtitle1'>
                         {dataReks.subtitle}
                     </Typography>
                     </CardContent>

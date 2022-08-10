@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Container, InputBase } from '@material-ui/core';
-import { Button, Rating, Pagination, Stack } from '@mui/material'
+import { Container, InputBase, Typography } from '@material-ui/core';
+import { Button, Rating, Pagination, Stack, Skeleton } from '@mui/material'
 import { ArrowBack, Search } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 import Map from './map/map';
@@ -14,14 +14,16 @@ const All = ({onDetail, dataUser}) => {
 
     const [data, setData] = useState([])
     const [favorite, setFavorite] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1)
-    const PER_PAGE = 4
+    const PER_PAGE = 8
     const count = Math.ceil(data.length / PER_PAGE);
     const _data = usePagination(data, PER_PAGE);
 
     const getData = async () => {
-        const respon = await axios.get(`http://localhost:5000/admin/getDataWisata`)
+        const respon = await axios.get(`https://rekomend.herokuapp.com/admin/getDataWisata`)
         setData(respon.data.data);
+        setLoading(false)
     }
 
     const handlePagination = (e, p) => {
@@ -55,18 +57,96 @@ const All = ({onDetail, dataUser}) => {
                 inputProps={{ 'aria-label': 'search' }}
                 />
             </div>
-            <div className='dark:bg-gray-900  mb-20'>
-            <h1 className='text-4xl font-semibold py-8 md:px-0 dark:text-gray-100'>Explore Destinasi</h1>
-            <div className='md:px-0 grid dark:bg-gray-900 sm:grid-cols-2 gap-12 md:grid-cols-3 lg:grid-cols-4 px-8 scrollbar-hide'>
+            <div className='mb-20'>
+            <Typography style={{fontWeight: 'bold', display: 'flex', flexDirection: 'column', marginTop: '3rem'}} variant='h3'>Explore Destinasi</Typography>
+            <p className='mb-8 text-xl text-slate-500'>Semua Destinasi bisa anda cari pada<br/>  halaman ini, tunggu apalagi explore sekarang</p>
+            <div className='grid sm:grid-cols-2 gap-12 md:grid-cols-3 lg:grid-cols-4'>
+            {
+                loading && 
+                <>
+                <div className='relative h-[340px] w-full'>
+                <Skeleton sx={{ height: '80%', borderRadius: '10px' }} animation="wave" variant="rectangular" />
+                <div className='bg-white absolute bottom-0 left-[18px] rounded-xl w-[88%] p-4 shadow-md flex flex-col items-center'>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={10} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={60} width="80%" style={{ marginBottom: 6 }}/>
+                </div>
+                </div>
+                <div className='relative h-[340px] w-full'>
+                <Skeleton sx={{ height: '80%', borderRadius: '10px' }} animation="wave" variant="rectangular" />
+                <div className='bg-white absolute bottom-0 left-[18px] rounded-xl w-[88%] p-4 shadow-md flex flex-col items-center'>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={10} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={60} width="80%" style={{ marginBottom: 6 }}/>
+                </div>
+                </div>
+                <div className='relative h-[340px] w-full'>
+                <Skeleton sx={{ height: '80%', borderRadius: '10px' }} animation="wave" variant="rectangular" />
+                <div className='bg-white absolute bottom-0 left-[18px] rounded-xl w-[88%] p-4 shadow-md flex flex-col items-center'>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={10} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={60} width="80%" style={{ marginBottom: 6 }}/>
+                </div>
+                </div>
+                <div className='relative h-[340px] w-full'>
+                <Skeleton sx={{ height: '80%', borderRadius: '10px' }} animation="wave" variant="rectangular" />
+                <div className='bg-white absolute bottom-0 left-[18px] rounded-xl w-[88%] p-4 shadow-md flex flex-col items-center'>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={10} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={60} width="80%" style={{ marginBottom: 6 }}/>
+                </div>
+                </div>
+                <div className='relative h-[340px] w-full'>
+                <Skeleton sx={{ height: '80%', borderRadius: '10px' }} animation="wave" variant="rectangular" />
+                <div className='bg-white absolute bottom-0 left-[18px] rounded-xl w-[88%] p-4 shadow-md flex flex-col items-center'>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={10} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={60} width="80%" style={{ marginBottom: 6 }}/>
+                </div>
+                </div>
+                <div className='relative h-[340px] w-full'>
+                <Skeleton sx={{ height: '80%', borderRadius: '10px' }} animation="wave" variant="rectangular" />
+                <div className='bg-white absolute bottom-0 left-[18px] rounded-xl w-[88%] p-4 shadow-md flex flex-col items-center'>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={10} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={60} width="80%" style={{ marginBottom: 6 }}/>
+                </div>
+                </div>
+                <div className='relative h-[340px] w-full'>
+                <Skeleton sx={{ height: '80%', borderRadius: '10px' }} animation="wave" variant="rectangular" />
+                <div className='bg-white absolute bottom-0 left-[18px] rounded-xl w-[88%] p-4 shadow-md flex flex-col items-center'>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={10} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={60} width="80%" style={{ marginBottom: 6 }}/>
+                </div>
+                </div>
+                <div className='relative h-[340px] w-full'>
+                <Skeleton sx={{ height: '80%', borderRadius: '10px' }} animation="wave" variant="rectangular" />
+                <div className='bg-white absolute bottom-0 left-[18px] rounded-xl w-[88%] p-4 shadow-md flex flex-col items-center'>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={10} width="80%" style={{ marginBottom: 6 }}/>
+                    <Skeleton animation="wave" height={60} width="80%" style={{ marginBottom: 6 }}/>
+                </div>
+                </div>
+                </>
+            }
             {_data.currentData().map((datas, index)=>(
             <div key={index} className='relative h-[340px] w-full'>
-                    <img src={`http://localhost:5000/admin/getSingleImage/${datas.gambar}`} alt='wisata' className=' w-full h-[80%] rounded-md scale-100 hover:scale-[1.05] hover:ease-in-out hover:duration-700 duration-700'/>
+                    <img src={`https://rekomend.herokuapp.com/admin/getSingleImage/${datas.gambar}`} alt='wisata' className=' w-full h-[80%] rounded-md scale-100 hover:scale-[1.05] hover:ease-in-out hover:duration-700 duration-700'/>
                     <div className='cursor-pointer opacity-80 absolute top-4 right-4 bg-slate-50 rounded-md px-3 py-2'>
                     {
                         favorite? <span className='text-xl text-red-600'><ion-icon name="heart"/></span> : <span className='text-xl hover:text-red-600' ><ion-icon name="heart"/></span>
                     }
                     </div>
-                    <div className='bg-white dark:bg-gray-800 dark:text-gray-200 absolute bottom-0 left-[18px] rounded-xl w-[88%] p-4 shadow-md flex flex-col items-center'>
+                    <div className='bg-white absolute bottom-0 left-[18px] rounded-xl w-[88%] p-4 shadow-md flex flex-col items-center'>
                         <h2 className='text-2xl'>{datas.wisata}</h2>
                         {/* <p className='text-sm text-gray-500'>Anim veniam sit nulla reprehenderit veniam officia dolore ut velit occaecat velit voluptate ad est.</p> */}
                         <span className='flex items-center'>

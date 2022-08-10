@@ -16,7 +16,7 @@ const Profile = ({dataUser}) => {
 
     const autorization = () => {
         const token = localStorage.getItem("token");
-        axios.get('http://localhost:5000/getUser', {
+        axios.get('https://rekomend.herokuapp.com/getUser', {
         headers: {
         'Authoriz': token
         }

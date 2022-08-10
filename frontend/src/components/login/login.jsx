@@ -80,7 +80,7 @@ const Login = () => {
             password: password
         }
 
-        axios.post('http://localhost:5000/login', data)
+        axios.post('https://rekomend.herokuapp.com/login', data)
         .then(result => {
             if(result) {
                 localStorage.setItem('token', result.data.token)
@@ -103,7 +103,9 @@ const Login = () => {
         <Card className={classes.card}>
             <CardContent className={classes.cardContent}>
                 <Grid style={{textAlign: 'center', padding: '10px', paddingRight: '80px', paddingLeft: '80px'}}>
+                    <div style={{display: 'flex', justifyContent: 'center'}}>
                     <img style={{height: '40px', width: '40px'}} src={LogoWisata} alt='logoWisata'/>
+                    </div>
                     <Typography className={classes.title} variant='h5' gutterBottom>Welcome Login</Typography>
                     <Typography className={classes.miniText} variant='subtitle'>Enter your account to continue</Typography>
                 </Grid>

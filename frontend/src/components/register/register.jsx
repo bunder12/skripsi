@@ -30,7 +30,7 @@ const Register = () => {
             konfirPass: konfirPass,
         }
 
-        axios.post('http://localhost:5000/daftar', data)
+        axios.post('https://rekomend.herokuapp.com/daftar', data)
         .then(result => {
             setValidationsucces(result.data.message)
         }).catch(e => {

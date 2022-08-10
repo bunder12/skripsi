@@ -20,7 +20,7 @@ const Banner = ({refHome}) => {
       <Typography className={classes.title} variant='h1'>CARI WISATA BANGKA BELITUNG BERSAMA KAMI RekBB</Typography>
       </Fade>
       <Fade left delay={600}>
-      <Typography className={classes.subtitle} variant='subtitle'>Mudah dengan kami untuk mencari wisata bangka belitung, dan ada fitur-fitur menarik didalam app kami, mari gunakan RekBB untuk mempermudah rekreasi wisata anda di Bangka Belitung</Typography>
+      <Typography className={classes.subtitle} variant='subtitle1'>Mudah dengan kami untuk mencari wisata bangka belitung, dan ada fitur-fitur menarik didalam app kami, mari gunakan RekBB untuk mempermudah rekreasi wisata anda di Bangka Belitung</Typography>
       </Fade>
       <Fade left delay={900}>
       <div className={classes.areaBtn}>

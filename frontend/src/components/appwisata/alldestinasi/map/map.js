@@ -18,7 +18,7 @@ const Map = ({data}) => {
 
   return (
     <>
-  <MapContainer className='w-[100%] h-[60vh] sm:h-[40vh] -z-10 sm:z-0 outline-none rounded-md'  center={[-2.5478741, 106.3506705]} zoom={9}>
+  <MapContainer className='w-[100%] h-[60vh] sm:h-[40vh] -z-10 sm:z-0 outline-none rounded-md'  center={[-2.3578741, 106.8506700]} zoom={8}>
   <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'

@@ -10,7 +10,49 @@ import useStyles from './styled'
 
 const Navbar = ({dataUser, refAbout, refHome, refContact, refKategori, refRekomendasi}) => {
 
-    function showAbout() {
+
+    //mobile
+    function showAboutMobile() {
+        window.scrollTo({
+          top: refAbout.current.offsetTop - 30,
+          behavior: "smooth"
+        })
+        setOpen(!open)
+      }
+
+      function showHomeMobile() {
+        window.scrollTo({
+          top: refHome.current.offsetTop - 30,
+          behavior: "smooth"
+        })
+        setOpen(!open)
+      }
+
+      function showContactMobile() {
+        window.scrollTo({
+          top: refContact.current.offsetTop - 30,
+          behavior: "smooth"
+        })
+        setOpen(!open)
+      }
+
+      function showKategoriMobile() {
+        window.scrollTo({
+          top: refKategori.current.offsetTop - 30,
+          behavior: "smooth"
+        })
+        setOpen(!open)
+      }
+
+      function showRekomendasiMobile() {
+        window.scrollTo({
+          top: refRekomendasi.current.offsetTop - 30,
+          behavior: "smooth"
+        })
+      }
+
+      //Desktop
+      function showAbout() {
         window.scrollTo({
           top: refAbout.current.offsetTop - 30,
           behavior: "smooth"
@@ -176,8 +218,8 @@ const Navbar = ({dataUser, refAbout, refHome, refContact, refKategori, refRekome
                 {
                     open && (
                         <div className={classes.menuMobile}>
-                            <MenuItem style={{marginRight: '16px'}}>Home</MenuItem>
-                            <MenuItem style={{marginRight: '16px'}}>About</MenuItem>
+                            <MenuItem onClick={showHomeMobile} style={{marginRight: '16px'}}>Home</MenuItem>
+                            <MenuItem onClick={showAboutMobile} style={{marginRight: '16px'}}>About</MenuItem>
                             <MenuItem onClick={() => setSubMenu(!subMenu)} style={{marginRight: '16px', display: 'flex'}}>
                                 <div style={{flexGrow: 1, display: 'flex', alignItems: 'center'}}>Explore</div>
                                 <span>
@@ -189,20 +231,20 @@ const Navbar = ({dataUser, refAbout, refHome, refContact, refKategori, refRekome
                             {
                                 subMenu && (
                                 <div className={classes.subMenu}>
-                                    <MenuItem>All Destinasi</MenuItem>
-                                    <MenuItem>Kategori</MenuItem>
-                                    <MenuItem>Rekomendasi</MenuItem>
+                                    <MenuItem component={Link} to="/all-destinasi">All Destinasi</MenuItem>
+                                    <MenuItem onClick={login? showKategoriMobile:handleLogin}>Kategori</MenuItem>
+                                    <MenuItem onClick={login? showRekomendasiMobile:handleLogin}>Rekomendasi</MenuItem>
                                 </div>
                                 )
                             }
-                            <MenuItem style={{marginRight: '16px'}}>Contact</MenuItem>
+                            <MenuItem onClick={showContactMobile} style={{marginRight: '16px'}}>Contact</MenuItem>
                         </div>
                     )
                 }
                 <div className={classes.menuDesktop}>
-                <Typography onClick={showHome} style={{marginRight: '16px'}}>Home</Typography>
-                <Typography onClick={showAbout} style={{marginRight: '16px'}}>About</Typography>
-                <Typography onClick={()=> setSubMenuDesktop(!subMenuDesktop)} style={{marginRight: '16px'}}>
+                <Typography onClick={showHome} style={{marginRight: '16px'}} variant='subtitle1'>Home</Typography>
+                <Typography onClick={showAbout} style={{marginRight: '16px'}} variant='subtitle1'>About</Typography>
+                <Typography onClick={()=> setSubMenuDesktop(!subMenuDesktop)} style={{marginRight: '16px'}} variant='subtitle1'>
                     Explore
                     {
                         subMenuDesktop? <KeyboardArrowDown/> : <KeyboardArrowDown/>
@@ -219,7 +261,7 @@ const Navbar = ({dataUser, refAbout, refHome, refContact, refKategori, refRekome
                     </div>
                     )
                 }
-                <Typography onClick={showContact} style={{marginRight: '16px'}}>Contact</Typography>
+                <Typography onClick={showContact} style={{marginRight: '16px'}} variant='subtitle1'>Contact</Typography>
                 </div>
                 {
                     !login && (
@@ -245,7 +287,7 @@ const Navbar = ({dataUser, refAbout, refHome, refContact, refKategori, refRekome
                                 color="inherit"
                                 onClick={handleProfile}
                                 >
-                                    <Typography>{myName}{dataUser.username}</Typography>
+                                    <Typography variant='subtitle1'>{myName}{dataUser.username}</Typography>
                                     {
                                         profile? <Avatar style={{borderRadius: '100%', width: '40px', height: '40px', marginLeft: '12px'}} src={myProfile} alt="noProfile"/> : <AccountCircle style={{fontSize: '40px', marginLeft: '12px'}}/>
                                     }

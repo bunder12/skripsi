@@ -15,7 +15,7 @@ const Forgotpassword = () => {
             email: email
         }
 
-        axios.put('http://localhost:5000/forgotpassword', data)
+        axios.put('https://rekomend.herokuapp.com/forgotpassword', data)
         .then(result => {
            setAlert(result.data.message)
         }).catch(e => {

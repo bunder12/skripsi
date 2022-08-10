@@ -30,6 +30,8 @@ const App = () => {
   const handleDetail = async (wisataId, dataUser) => {
     setIdWisata(wisataId)
     setData(dataUser)
+    setDataUser(dataUser)
+    localStorage.setItem("id", wisataId);
   }
 
   const [login, setLogin] = useState(
@@ -38,7 +40,7 @@ const App = () => {
 
   const autorization = () => {
     const token = localStorage.getItem("token");
-    axios.get('http://localhost:5000/getUser', {
+    axios.get('https://rekomend.herokuapp.com/getUser', {
     headers: {
       'Authoriz': token
     }
@@ -63,11 +65,11 @@ const App = () => {
       <Routes>
         <Route exact path='/' element={<Appwisata onAddFavorite={handleAddFavorite} onDetail={handleDetail}/>} />
         <Route exact path='/all-destinasi' element={<All onDetail={handleDetail} dataUser={dataUser}/>} />
-        <Route exact path='/kategori-pantai' element={<Pantai/>} />
-        <Route exact path='/kategori-danau' element={<Danau/>} />
+        <Route exact path='/kategori-pantai' element={<Pantai onDetail={handleDetail} dataUser={dataUser}/>} />
+        <Route exact path='/kategori-danau' element={<Danau onDetail={handleDetail} dataUser={dataUser}/>} />
         <Route exact path='/kategori-sejarah' element={<Sejarah onDetail={handleDetail} dataUser={dataUser}/>} />
-        <Route exact path='/kategori-airterjun' element={<Airterjun/>} />
-        <Route exact path='/detail' element={<Details idWisata={idWisata} dataUser={data}/>} />
+        <Route exact path='/kategori-airterjun' element={<Airterjun onDetail={handleDetail} dataUser={dataUser}/>} />
+        <Route exact path='/detail' element={<Details idWisata={idWisata} dataUser={dataUser}/>} />
         <Route exact path='/profile' element={<Profile dataUser={dataUser}/>} />
         <Route exact path='/favorite' element={<Favorite favorite={favorite}/>} />
         <Route exact path='/login' element={<Login/>} />

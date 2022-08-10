@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Typography, Container, Card, CardContent, Rating, Modal, Box, TextField, Divider, Alert, Snackbar } from '@mui/material'
-import { ArrowBack } from '@material-ui/icons'
+import { Button, Typography, Container, Card, CardContent, Rating, Modal, Box, TextField, Divider, Alert, Snackbar, Skeleton } from '@mui/material'
+import { ArrowBack, Launch } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 import Map from './map/map'
 import axios from 'axios'
@@ -10,12 +10,14 @@ const Details = ({idWisata, dataUser}) => {
     
     const [ratingValue, setRatingValue] = useState(0);
     const [ratingValues, setRatingValues] = useState(4);
-    const [ratingKomentar, setRatingKomentar] = useState({});
+    const [ratingKomentar, setRatingKomentar] = useState([]);
     const [open, setOpen] = useState(false);
     const [save, setSave] = useState(false);
     const [messageUlasan, setMessageUlasan] = useState("");
-    const [wisata, setWisata] = useState({})
+    const [wisata, setWisata] = useState([])
+    const [length, setLength] = useState(0)
     const [user, setUser] = useState({})
+    const [loading, setLoading] = useState(true);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -34,28 +36,35 @@ const Details = ({idWisata, dataUser}) => {
       };
 
     const detail = async (idWisata, dataUser) =>{
+        const id = localStorage.getItem("id");
+        idWisata = id
         const wisata = await axios.get(`http://localhost:5000/getWisataId/${idWisata}`)
-        const ratingKomentar = await axios.get(`http://localhost:5000/rating`)
-        setRatingKomentar(ratingKomentar.data)
+        const ratingKomentar = await axios.get(`http://localhost:5000/getRating`)
+        const a = ratingKomentar.data.data
+        const d = a.filter(as => as.aid === idWisata)
+        setLength(d)
+        setRatingKomentar(ratingKomentar.data.data)
         setWisata(wisata.data.data[0])
         setUser(dataUser._id)
-        // ratingKomentars()
+        setLoading(false)
     } 
-
-    // const ratingKomentars = async () => {
-    //     const ratingKomentar = await axios.get(`http://localhost:5000/getRating/${wisata._id}`)
-    //     console.log(ratingKomentar)
-    // }
 
     useEffect(() => {
     detail(idWisata, dataUser)
-    }, [])
+    if(idWisata === "62a88ae849234b755a835b58"){
+        window.location.href = '/detail';
+    }
+    }, [dataUser])
+
+    window.scrollTo(0,0)
 
     const handleSave = () => {
     const komentar = document.querySelector("#komentar").value;
+    let userEmail = localStorage.getItem("name")
     const data = {
         aid: wisata._id,
         uid: user,
+        userEmail: userEmail,
         rating: ratingValue,
         komentar: komentar
     }
@@ -64,8 +73,9 @@ const Details = ({idWisata, dataUser}) => {
         setMessageUlasan(res.data.message)
         handleClose()
         setSave(true)
+        window.location.href = '/detail';
     }).catch(e => {
-        console.log(e)
+        console.log("hehe eror")
     })
     axios.put(`http://localhost:5000/totalRating/${wisata._id}`)
     }
@@ -78,6 +88,8 @@ const Details = ({idWisata, dataUser}) => {
         setSave(false);
       };
 
+      const idwis = localStorage.getItem("id");
+
   return (
     <div>
         <Container>
@@ -89,16 +101,36 @@ const Details = ({idWisata, dataUser}) => {
             <div className='block md:flex pb-12'>
             <div className='basis-full md:basis-8/12'>
                 <div>
-                    <Typography variant='h4'>{wisata.wisata}</Typography>
+                    {
+                        loading && (
+                            <>
+                            <Skeleton animation="wave" height={15} width="10%" style={{ marginBottom: 6 }}/>
+                            <Skeleton animation="wave" height={385} width="100%" style={{ marginBottom: 6 }} variant='rectangle'/>
+                            <Skeleton animation="wave" height={15} width="10%" style={{ marginBottom: 6 }}/>
+                            <Skeleton animation="wave" height={15} width="60%" style={{ marginBottom: 6 }}/>
+                            <Skeleton animation="wave" height={15} width="100%" style={{ marginBottom: 6 }}/>
+                            <Skeleton animation="wave" height={15} width="100%" style={{ marginBottom: 6 }}/>
+                            <Skeleton animation="wave" height={15} width="100%" style={{ marginBottom: 6 }}/>
+                            <Skeleton animation="wave" height={15} width="100%" style={{ marginBottom: 6 }}/>
+                            </>
+                        )
+                    }
 
-                    <img className='w-full' src={`http://localhost:5000/admin/getSingleImage/${wisata.gambar}`}/>
-                    <Typography variant='h6'>Deskripsi</Typography>
-                    <Typography variant='subtitle1'>{wisata.deskripsi}</Typography>
+                    {
+                        !loading && (
+                            <>
+                            <Typography variant='h4'>{wisata.wisata}</Typography>
+                            <img className='w-full py-4' src={`http://localhost:5000/admin/getSingleImage/${wisata.gambar}`}/>
+                            <Typography style={{marginBottom: '0.5rem'}} variant='h6'>Deskripsi</Typography>
+                            <Typography variant='subtitle1'>{wisata.deskripsi}</Typography>
+                            </>
+                        )
+                    }
                 </div>
                 <Divider style={{margin: '20px 0'}}/>
                 <div className=''>
                     <Typography variant='h4'>Lokasi</Typography>
-                    <Map lat={wisata.lat} lang={wisata.lang}/>
+                    <Map/>
                 </div>
                 <div className='py-12'>
                     <div className='flex justify-between items-center'>
@@ -142,16 +174,16 @@ const Details = ({idWisata, dataUser}) => {
                         value={wisata.totalRating}
                         precision={0.5}
                       />
-                    <Typography style={{marginLeft: '10px'}}>{Math.round(wisata.totalRating)}.0 ({ratingKomentar.length} ulasan)</Typography>
+                    <Typography style={{marginLeft: '10px'}}>{Math.round(wisata.totalRating)}.0 ({length.length} ulasan)</Typography>
                     </div>
                     {
                         ratingKomentar.length && (
                             ratingKomentar.map(ratingKomentars => (
                                 <>
                             {
-                                ratingKomentars.aid == idWisata && (
+                                ratingKomentars.aid == idwis && (
                                     <div className='p-4 border-2 rounded-md mb-8'>
-                                        <Typography>{ratingKomentars.usersdetail[0].username}</Typography>
+                                        <Typography>{ratingKomentars.userEmail === null? ratingKomentars.userDetail[0].username : ratingKomentars.userEmail}</Typography>
                                         <Rating readOnly value={ratingValues}/>
                                         <Typography style={{fontSize: '14px', color: '#B9B9B9'}} variant='subtitle1'>Berkomentar</Typography>
                                         <Typography>"{ratingKomentars.komentar}"</Typography>
@@ -167,9 +199,9 @@ const Details = ({idWisata, dataUser}) => {
             <div className='basis-full md:basis-4/12 sticky px-0 md:px-8 h-screen top-0'>
                 <Card>
                     <CardContent>
-                        <Typography>Alamat</Typography>
-                        <Typography>Jl. Mayor Sunaryo, Kedung Lumbu, Kec. Ps. Kliwon, Kota Surakarta, Jawa Tengah 57133</Typography>
-                        <Button href={wisata.urlMap} fullWidth variant='contained'>Telusuri Map</Button>
+                        <Typography style={{fontWeight: 'bold'}} variant='subtitle1'>INFO</Typography>
+                        <Typography style={{margin: '10px 0'}} variant='subtitle1'>Untuk mempermudah anda dalam menemukan lokasi, tinggal klik button telusuri Map.</Typography>
+                        <Button href={wisata.urlMap} fullWidth variant='contained'><Launch style={{fontSize: '20px', marginRight: '10px'}}/>Telusuri Map</Button>
                     </CardContent>
                 </Card>
             </div>
